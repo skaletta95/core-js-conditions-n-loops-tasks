@@ -21,8 +21,11 @@
  *  0  => true
  *  -5 => false
  */
-function isPositive(/* number */) {
-  throw new Error('Not implemented');
+function isPositive(number) {
+  if (number >= 0) {
+    return true;
+  }
+  return false;
 }
 
 /**
@@ -38,10 +41,16 @@ function isPositive(/* number */) {
  *  -5, 0, 5      => 5
  *  -0.1, 0, 0.2  => 0.2
  */
-function getMaxNumber(/* a, b, c */) {
-  throw new Error('Not implemented');
+function getMaxNumber(a, b, c) {
+  const arr = [a, b, c];
+  let max = arr[0];
+  for (let i = 1; i < arr.length; i += 1) {
+    if (arr[i] > max) {
+      max = arr[i];
+    }
+  }
+  return max;
 }
-
 /**
  * Checks if a queen can capture a king in the next move on an 8x8 chessboard.
  * See more details at https://en.wikipedia.org/wiki/Queen_(chess)
@@ -60,8 +69,13 @@ function getMaxNumber(/* a, b, c */) {
  * {x: 1, y: 1}, {x: 2, y: 8} => false
  * {x: 1, y: 1}, {x: 2, y: 8} => false
  */
-function canQueenCaptureKing(/* queen, king */) {
-  throw new Error('Not implemented');
+function canQueenCaptureKing(queen, king) {
+  const sameRow = queen.x === king.x;
+  const sameColumn = queen.y === king.y;
+  const sameDiagonal =
+    Math.abs(queen.x - king.x) === Math.abs(queen.y - king.y);
+
+  return sameRow || sameColumn || sameDiagonal;
 }
 
 /**
@@ -82,8 +96,11 @@ function canQueenCaptureKing(/* queen, king */) {
  *  2, 2, 5   => false
  *  3, 0, 3   => false
  */
-function isIsoscelesTriangle(/* a, b, c */) {
-  throw new Error('Not implemented');
+function isIsoscelesTriangle(a, b, c) {
+  if (a + b <= c || b + c <= a || c + a <= b === true) {
+    return false;
+  }
+  return a === b || b === c || c === a;
 }
 
 /**
@@ -100,8 +117,24 @@ function isIsoscelesTriangle(/* a, b, c */) {
  *  10  => X
  *  26  => XXVI
  */
-function convertToRomanNumerals(/* num */) {
-  throw new Error('Not implemented');
+function convertToRomanNumerals(num) {
+  const romanSymbols = [
+    { value: 10, symbol: 'X' },
+    { value: 9, symbol: 'IX' },
+    { value: 5, symbol: 'V' },
+    { value: 4, symbol: 'IV' },
+    { value: 1, symbol: 'I' },
+  ];
+  let result = '';
+  let number = num;
+  for (let i = 0; i < romanSymbols.length; i += 1) {
+    while (number >= romanSymbols[i].value) {
+      result += romanSymbols[i].symbol;
+      number -= romanSymbols[i].value;
+    }
+  }
+
+  return result;
 }
 
 /**
@@ -119,8 +152,31 @@ function convertToRomanNumerals(/* num */) {
  *  '10,5'    => 'one zero point five'
  *  '1950.2'  => 'one nine five zero point two'
  */
-function convertNumberToString(/* numberStr */) {
-  throw new Error('Not implemented');
+function convertNumberToString(numberStr) {
+  const digitToWord = {
+    0: 'zero',
+    1: 'one',
+    2: 'two',
+    3: 'three',
+    4: 'four',
+    5: 'five',
+    6: 'six',
+    7: 'seven',
+    8: 'eight',
+    9: 'nine',
+    '-': 'minus',
+    '.': 'point',
+  };
+  const num = Number(numberStr);
+  let words = '';
+
+  if (num in digitToWord) return digitToWord[num];
+  if (num >= 10 < 100) {
+    num.spit('');
+    words = digitToWord[num[0]] + digitToWord[num[1]];
+    num.join('');
+  }
+  return words;
 }
 
 /**
