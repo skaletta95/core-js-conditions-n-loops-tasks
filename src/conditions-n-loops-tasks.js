@@ -137,46 +137,59 @@ function convertToRomanNumerals(num) {
   return result;
 }
 
-/**
- * Converts a number to a string, replacing digits with words.
- * In this task, the use of methods of the String and Array classes is not allowed.
- *
- * @param {string} numberStr - The number as a string.
- * @return {string} The number with digits replaced by words.
- *
- * @example:
- *  '1'       => 'one'
- *  '10'      => 'one zero'
- *  '-10'     => 'minus one zero'
- *  '10.5'    => 'one zero point five'
- *  '10,5'    => 'one zero point five'
- *  '1950.2'  => 'one nine five zero point two'
- */
 function convertNumberToString(numberStr) {
-  const digitToWord = {
-    0: 'zero',
-    1: 'one',
-    2: 'two',
-    3: 'three',
-    4: 'four',
-    5: 'five',
-    6: 'six',
-    7: 'seven',
-    8: 'eight',
-    9: 'nine',
-    '-': 'minus',
-    '.': 'point',
-  };
-  const num = Number(numberStr);
-  let words = '';
+  let result = '';
 
-  if (num in digitToWord) return digitToWord[num];
-  if (num >= 10 < 100) {
-    num.spit('');
-    words = digitToWord[num[0]] + digitToWord[num[1]];
-    num.join('');
+  for (let i = 0; i < numberStr.length; i += 1) {
+    const char = numberStr[i];
+    let word;
+
+    switch (char) {
+      case '0':
+        word = 'zero';
+        break;
+      case '1':
+        word = 'one';
+        break;
+      case '2':
+        word = 'two';
+        break;
+      case '3':
+        word = 'three';
+        break;
+      case '4':
+        word = 'four';
+        break;
+      case '5':
+        word = 'five';
+        break;
+      case '6':
+        word = 'six';
+        break;
+      case '7':
+        word = 'seven';
+        break;
+      case '8':
+        word = 'eight';
+        break;
+      case '9':
+        word = 'nine';
+        break;
+      case '-':
+        word = 'minus';
+        break;
+      case '.':
+      case ',':
+        word = 'point';
+        break;
+      default:
+        throw new Error(`Invalid character '${char}' in input.`);
+    }
+
+    result += (result ? ' ' : '') + word;
   }
-  return words;
+
+  return result;
 }
 
 /**
@@ -191,8 +204,22 @@ function convertNumberToString(numberStr) {
  *  '0123210'   => true
  *  'qweqwe'    => false
  */
-function isPalindrome(/* str */) {
-  throw new Error('Not implemented');
+function isPalindrome(str) {
+  const length = (() => {
+    let count = 0;
+    while (str[count] !== undefined) {
+      count += 1;
+    }
+    return count;
+  })();
+
+  for (let i = 0; i < length / 2; i += 1) {
+    if (str[i] !== str[length - 1 - i]) {
+      return false;
+    }
+  }
+
+  return true;
 }
 
 /**
